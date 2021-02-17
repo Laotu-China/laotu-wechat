@@ -1,4 +1,3 @@
-//DEPRECATED: DO NOT USE
 // Takes in parameter 'category' which will be used to query from all products.
 //If 'category' === 'All' return all products. 
 //Return: array of product objects.

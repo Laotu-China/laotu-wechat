@@ -1,14 +1,13 @@
-scroll-view{
-  box-sizing: border-box;
-}
-
 page{
   height: 100%;
   width: 750rpx;
-  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
 }
 #bodyContainer{
-  min-height: 100%;
+  /* Body will take up the rest of the space apart from the navbar and tabbar */
+  flex-grow: 1;
+  background-color: #CCD4BF;
   display: flex;
   flex-direction: column;
   width: 750rpx;
@@ -25,24 +24,17 @@ page{
   background-color: #EEBAB2;
 }
 
-#featureEventsContainer{
-  height: 40vh;
-  width: 100%;
+.featureContainer{
+  height: 30vh;
+  background-color: #F5F3E7;
   display: flex;
   flex-direction: column;
-  
 }
-.featureTitleRow{
+.aboveRow{
   display: flex;
+  min-height: 10%;
   justify-content: space-between;
-  width: 100%;
-  background-color: #F1DEDC;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-.swiperContainer{
-  width: 100%;
-  flex: 1 0 10px;
+  background-color: #D4CFBD
 }
 
 .slotContent{
@@ -52,69 +44,17 @@ page{
 
 #titleRow{
   display: flex;
+  height: 100%;
   width: 100%;
-  border-style: solid;
-  flex-wrap: wrap;
-  flex-basis: auto;
 }
 #bodyRow{
   display: flex;
   flex-direction: column;
-  color: #505050;
-  font-size: 0.9rem;
 }
 #moreButton{
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#featureProductsContainer{
-  display: block;
-  width: 100%;
-  height: auto;
-  background-color: white;
-}
-
-#productsContainer{
-  width: 100%;
-  height: 40vh;
-  /*background-color: white;*/
-  padding: 20rpx 0rpx;
-}
-#productsContainer scroll-view{
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-}
-#scrollItemContainer{
-  height: 100%;
-  width: auto;
-  white-space: nowrap;
-  display: inline-block;
-  /*background-color: thistle;*/
-  overflow: auto;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
-}
-
-.productCard{
-  width: 400rpx;
-  height: 100%;
-  display: inline-block;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
-  background-color: #f2f2f2;
-}
-.productImageContainer{
-  width: 100%;
-  height: 40%;
-  /*background-color: rgb(179, 41, 179);*/
-}
-.productDescContainer{
-  width: 100%;
-  height: 60%;
-  /*background-color: tomato;*/
 }
 
 

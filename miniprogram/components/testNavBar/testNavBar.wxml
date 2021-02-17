@@ -1,3 +1,0 @@
-<!--components/testNavBar.wxml-->
-<view class="body">NavBar</view>
-<view class="content" style="margin-top:{{100}}px;"></view>

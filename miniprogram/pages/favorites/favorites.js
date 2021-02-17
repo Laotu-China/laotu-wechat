@@ -2,8 +2,13 @@ const app = getApp();
 
 Page({
   data: {
-    activeTabIndex: 0,
-    //tabs : [{title: "Events", data: [{_id: Str, title: Str, ...}]}, {title : "Products", data: []}]
+    motto: 'Hello World',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    tabs: [],
+    activeTab: 0 ,
+    tableHeight: 100
   },
   //事件处理函数
   bindViewTap: function() {
@@ -21,7 +26,6 @@ Page({
         that.setData({
           tabs: res.result.favTabData
         })
-        console.log("tabs", that.data.tabs);
       },
       fail: console.error
     });

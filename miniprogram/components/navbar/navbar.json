@@ -1,6 +1,3 @@
 {
-  "component" : true,
-  "usingComponents" : {
-    "vant-icon" : "../../vantDist/icon/index"
-  }
+  "component" : true
 }

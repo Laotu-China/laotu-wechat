@@ -1,1 +1,3 @@
-<text>None</text>
+<view id="iconsContainer">
+  <vant-goods-action-icon icon="chat-o" text="Chat"></vant-goods-action-icon>
+</view>

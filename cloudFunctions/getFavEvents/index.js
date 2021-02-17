@@ -1,5 +1,4 @@
-// [DEPRECATED: DO NOT USE] 
-//Function returns the favorited events objects using the user's favorite events ID list.
+// Function returns the favorited events objects using the user's favorite events ID list.
 //No required parameters, optional userID parameter
 
 const cloud = require('wx-server-sdk')

@@ -13,43 +13,43 @@
     "pages/itemTabBarTemp/itemTabBarTemp",
     "pages/events/events",
     "pages/profile/profile",
-    "pages/shoppingCart/shoppingCart",
-    "pages/checkout/checkout",
-    "pages/editShippingInfo/editShippingInfo",
-    "pages/testUI/testUI",
-    "pages/eventItem/eventItem",
-    "pages/myorders/myorders"
+    "pages/shoppingCart/shoppingCart"
   ],
   "window": {
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFF00",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#FFFFFE",
-    "selectedColor": "#131313",
-    "color": "#ADADAD",
+    "borderStyle": "#D3D3D3",
+    "selectedColor": "#D03232",
+    "color": "#131313",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "weUISvg/home-o.png",
-        "selectedIconPath": "weUISvg/home.png",
+        "iconPath": "img/home.png",
+        "selectedIconPath": "img/home.png",
         "text": "Home"
       },
       {
         "pagePath": "pages/events/events",
-        "iconPath": "weUISvg/tag-o.png",
-        "selectedIconPath": "weUISvg/tag.png",
+        "iconPath": "img/event.png",
+        "selectedIconPath": "img/event.png",
         "text": "Event"
       },
       {
         "pagePath": "pages/product/product",
-        "iconPath": "weUISvg/shop-o.png",
-        "selectedIconPath": "weUISvg/shop.png",
+        "iconPath": "img/store.jpg",
+        "selectedIconPath": "img/store.jpg",
         "text": "Store"
       },
       {
         "pagePath": "pages/profile/profile",
-        "iconPath": "weUISvg/me-o.png",
-        "selectedIconPath": "weUISvg/me.png",
+        "iconPath": "img/profile.png",
+        "selectedIconPath": "img/profile.png",
         "text": "My Profile"
       }
     ]

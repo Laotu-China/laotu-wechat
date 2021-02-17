@@ -2,11 +2,7 @@
 /**
  * When the component is attached, it gets the number of items in the user's cart.
  * We set numItems to the component local data for the shopping cart icon to render with a quantity.
- * On addToCart(), increase numItems locally +=x and will be updated and itemID will be uploaded to the cloud database
- * 
- * When the user clicks on the cartIcon, will set global variable 'itemNotAdded' to true which will be
- *     read by shoppingCart.js to not wait for the global variable 'itemAddedComplete' which is true once item is added
- *     by item.js 
+ * On addToCart(), increase numItems locally +=1 and will be updated and itemID will be uploaded to the cloud database 
  */
 var app = getApp();
 Component({
@@ -18,19 +14,19 @@ Component({
       //Required: Parent will pass the height.
       type: Number
     },
-    dotActive : {
-      //Required: whether or not the dot for the cart is active. Parent will pass in the value
-      type: Boolean, 
+    numItems : {
+      //Required: number of items in the shopping cart. Parent will pass in the numItems
+      type: Number, 
       observer: function(newVal, oldVal, changedPath){
         console.log("Received ", newVal);
         //Allows the component to re-render when the parent passes in a new numItems value
-        this.setData({_dotActive : newVal})
+        this.setData({_numItems : newVal})
       }
     },
-    _dotActive : {
+    _numItems : {
       //Copy of the value above. This value is set whenever numItems is set (passed from the parent).
       //This exists so there is not an infinite loop (see https://blog.csdn.net/zhangzeshan/article/details/83927582)
-      type: Boolean
+      type: Number
     },
     itemType: {
       //Required: parent will pass the item type ('product' or 'event') 
