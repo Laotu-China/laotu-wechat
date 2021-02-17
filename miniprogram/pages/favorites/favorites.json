@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "NavTab" : "../../components/navtab/navtab"
+    "CustomNav" : "../../components/navbar/navbar",
+    "vant-tab": "../../vantDist/tab/index",
+    "vant-tabs": "../../vantDist/tabs/index",
+    "itemCard" : "../../components/productCard/productCard"
   }
 }

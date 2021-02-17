@@ -1,10 +1,42 @@
-<NavTab title="Favorites" isBoth="true" tabs="{{tabs}}"
-  activeTab="{{activeTab}}" 
-  swiperClass="weui-tabs-swiper"
-  bindtabclick="onTabClick"
-  bindchange="onChange"
-  activeClass="tab-bar-title__selected">
-  <block wx:for="{{tabs}}" wx:key="title">
+<CustomNav isBoth="{{true}}" title="Favorites"></CustomNav>
+<view id="bodyContainer">
+  <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
+    <block wx:for="{{tabs}}" wx:key="unique3">
+      <vant-tab title="{{item.title}}">
+        <view id="productBody" class="spacedVerticalContainer sidePadding">
+          <view wx:for="{{item.data}}" wx:for-item="object" data-productid="{{product._id}}"class="itemCard spacedVerticalElement" wx:key="unique4" bindtap="clickedItemCard">
+            <!--Display this if it's an event card-->
+            <itemCard wx:if="{{item.title === 'Events'}}" imageSrc="{{object.thumbUrl}}" style="width: 100%">
+              <view slot="topRow" style="width: 100%;">
+                <view>{{object.title}}</view>
+              </view>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" style="width: 100%; height: 100%">
+                  <view>{{object.descSummary}}</view>
+                  <view>{{object.dateStr}}</view>
+                  <view style="font-weight: 500;">{{object.locationStr}}</view>
+                </view>
+              </view>
+            </itemCard>
+            <!--Display this if its a product card-->
+            <itemCard style="width: 100%" imageSrc="{{object.thumbUrl}}" wx:else>
+              <view slot="topRow" style="width: 100%;">
+                <view>{{object.title}}</view>
+              </view>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" class="slotContent">
+                  <view>{{object.descSummary}}</view>
+                  <view style="font-size: 1.5rem; font-weight: 500; color: red;">{{object.priceStr}}</view>
+                </view>
+              </view>
+            </itemCard>
+          </view>
+        </view>
+      </vant-tab>
+    </block>
+  </vant-tabs>  
+</view>
+  <!--<block wx:for="{{tabs}}" wx:key="title">
     <view class="tab-content" slot="tab-content-{{index}}">
       <block wx:for="{{item.data}}">
         <view class="event-container">
@@ -21,5 +53,5 @@
         </view>
       </block>
     </view>
-  </block>
-</NavTab>
+  </block>-->
+

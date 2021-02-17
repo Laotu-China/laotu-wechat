@@ -18,33 +18,72 @@
       </block>
     </swiper>
   </view>
-  <view id="featureEventsContainer" class="featureContainer spacedVerticalElement">
-    <view class="aboveRow viewPadding">
+  <!--<view slot="aboveRow" style="width: 100%; height: 100%">
+    <view class="slotContent viewPadding aboveRow">
       <text>Feature Events</text>
       <view hover-class="hoverClass" bindtap="clickMore" hover-stay-time="{{200}}">
         <text>More ></text>
       </view>
-      <!--<button size="mini" class="moreButton">More ></button>-->
     </view>
-    <!--Has width 100% and flex-grow:1 to define the size-->
-    <itemCard style="flex-grow:1; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
-      <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-      <view slot="topRow" style="width: 100%; height: 100%">
-        <!--The titleRow view container needs to have height and with 100%-->
-        <view id="titleRow" class="slotContent">
-          <text id="titleText">Carrots</text>
-        </view>
+  </view>-->
+  <view id="featureEventsContainer" class="spacedVerticalElement">
+    <view class="featureTitleRow viewPadding aboveRow" bindtap="clickEventsMore" >
+      <text>Featured Events</text>
+      <view hover-class="hoverClass" hover-stay-time="{{200}}">
+        <vant-icon name="arrow"></vant-icon>
       </view>
-      <view slot="bodyRow" style="width: 100%; height: 100%">
-        <view id="bodyRow" class="slotContent">
-          <text>Date and Time</text>
-          <text>Location: Beijing</text>
-          <text>Happy time with nature</text>
-        </view>
+    </view>
+    <!--NOTE: swiper container or swiper needs to have a fixed height and width...-->
+    <view class="swiperContainer">
+      <swiper wx:if="{{eventObjects.length > 0}}" indicator-dots="{{true}}" autoplay="{{false}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
+        <block wx:for="{{eventObjects}}" wx:key="*this" wx:for-item="eventObject">
+          <swiper-item>
+            <!--Has width 100% and height 100% to fit the container size-->
+            <itemCard data-eventid="{{eventObject._id}}" bindtap="clickedEventCard" style="height: 100%; width: 100%" isAbove="{{false}}" isBelow="{{false}}" imageSrc="{{eventObject.thumbUrl}}">
+              <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+              <view slot="topRow" style="width: 100%;">
+                <view style="height: 100%; width: 100%; font-size: 1.25rem; font-weight:525 !important">{{eventObject.title}}</view>
+              </view>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" class="slotContent">
+                  <text>{{eventObject.descSummary}}</text>
+                  <text>{{eventObject.locationStr}}</text>
+                </view>
+              </view>
+            </itemCard>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+  <view id="featureProductsContainer" class="spacedVerticalElement">
+    <view class="featureTitleRow viewPadding aboveRow" bindtap="clickProductsMore">
+      <text>Featured Products</text>
+      <view hover-class="hoverClass" hover-stay-time="{{200}}">
+        <vant-icon name="arrow"></vant-icon>
       </view>
-    </itemCard>
+    </view>
+    <view id="productsContainer">
+      <!--Scroll view is really tricky. Not sure how to add a border radius to the productCards. 
+          See https://blog.csdn.net/JiangYuXuan1994/article/details/82622083-->
+      <scroll-view scroll-x="true">
+        <view id="scrollItemContainer">
+          <view class="productCard" wx:for="{{productObjects}}" wx:key="test" wx:for-item="productObject" data-productid="{{productObject._id}}" bindtap="clickedProductCard">
+            <view class="productImageContainer">
+              <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
+            </view>
+            <view class="productDescContainer spacedVerticalContainer sidePadding">
+              <view class="spacedVerticalElement" style="font-weight: 525;color:#202020">
+                <text>{{productObject.title}}</text>
+              </view>
+              <view class="spacedVerticalElement" style="font-weight: 550; color:red; font-size: 20px;">
+                <text>¥{{productObject.price}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
   </view>
-  <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement">
-    
-  </view>
+  
 </view>

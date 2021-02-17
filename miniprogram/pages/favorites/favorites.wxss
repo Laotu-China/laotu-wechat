@@ -1,33 +1,26 @@
-.tab-content{
+page{
+  height: 100%;
+  width: 750rpx;
+  background-color: #f2f2f2;
   display: flex;
-  align-items: center;
   flex-direction: column;
 }
-.event-container{
-  /*background-color: mediumturquoise;*/
-  border-style: solid;
-  /* EACH CONTAINER HEIGHT */
-  height: 20vh;
-  width: 90%;
+#bodyContainer{
+  /* Body will take up the rest of the space apart from the navbar and tabbar */
+  flex: 1 0 10px;
+  background-color: white;
   display: flex;
-  /* add margin to top and bottom */
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  border-width: 2px;
-  border-radius: 5px;
-  overflow: hidden;
+  flex-direction: column;
+  width: 750rpx;
+  overflow: auto;
 }
-.image-container{
-  height: 100%;
-  width: 40%;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
+.itemCard{
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
 }
-.desc-container{
-  /*background-color: mediumvioletred;*/
-  flex-grow: 1;
+
+#bodyRow{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }

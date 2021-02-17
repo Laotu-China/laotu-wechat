@@ -1,52 +1,58 @@
 /* navbar CSS */
 /* consider changing nav-container height using the caspule position */
+view{
+  box-sizing: border-box;
+}
 
+.allContainer{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  top : 0;
+  /*Change the z-index so the navbar will be on top of the other material in scroll up */
+  z-index: 999;
+  background-color: white;
+}
+.top-buffer{
+  width: 100%;
+  display: block;
+}
 .nav-container{
   width: 750rpx;
   height: 44px;
   display: flex;
   align-items: center;
+  /*background-color: wheat;*/
+  /* This ensures that our capsule is symmetrical to the other capsule */
+  padding: 10px 10px 10px 10px;
+}
+.growContainer{
+  flex: 1 0 10px;
 }
 
-.top-buffer{
-  width: 100%;
-  display: block;
-}
-
-.title-container{
-  /* Should take up the rest of the space, or 60% width */
-  flex-grow: 1;
-  /*background-color: orange;*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 20px;
-}
-
-/* I want the icons stuff to be 20% width */
-.outside{
-  height: 100%;
-  /*background-color: powderblue;*/
-  display: flex;
-  align-items: center;
+.titleText{
+  font-size: 1.5rem;
 }
 
 .capsule{
+  margin-right: auto;
   border-radius: 500px;
   background-color: white;
   height: 30px;
+  padding-top : 5px;
+  padding-bottom: 5px;
   display: flex;
-  overflow: hidden;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
   border-style: solid;
   border-color: lightgray;
   border-width: 1px;
+  overflow: hidden;
 }
 .noCapsule{
-  background-color: white;
+  margin-right: auto;
+  /*background-color: white;*/
   height: 30px;
   display: flex;
   overflow: hidden;
@@ -61,24 +67,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+
 }
-/* the home icon is a little too large, reduce size */ 
-.home{
-  /*height: 80%;*/
-  /*background-color: purple;*/
-}
-.completeChild{
-  height: 100%;
-  width: 100%;
+.navigator{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.icon{
-  height: 100%;
-  width:100%;
+.leftContainer{
+  border-right: 1px solid black;
 }
 
 

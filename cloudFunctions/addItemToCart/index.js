@@ -1,5 +1,5 @@
-// Uploads item and itemQuantity to user's cart. 
-//Parameters: 'itemid' and 'quantity'
+// Uploads item and itemQuantity to user's cart. Called by item.js 
+//Parameters: 'itemid' and 'quantity' (required)
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -11,12 +11,33 @@ const db = cloud.database();
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openID = wxContext.OPENID;
+  
   //Upload the itemID and the quantity to the database
   //First get the cartProducts array
   let cartProductsResponse = await db.collection('userCart').where({
     _openid : openID
   }).get();
-  var cartProducts = cartProductsResponse.data[0].cartProducts;
+  console.log(cartProductsResponse);
+  //If the user record does not exist, initialize one
+  if (cartProductsResponse.data.length < 1){
+    console.log("User Record DNE!");
+    //Could not a record for the user- create one with empty cartProducts array
+    try{
+      await db.collection('userCart').add({
+      data : {
+        _openid : openID,
+        cartProducts : []
+        }
+      });
+    }catch(e){
+      throw new Error("Failed to initialize user record in the cart");
+    }
+    var cartProducts = [];
+  }
+  else{
+    var cartProducts = cartProductsResponse.data[0].cartProducts;
+  }
+
   //If there is an item object with the itemID already in cartProducts, simply increment the quantity
   let matchingItemObjectIndex = cartProducts.findIndex((itemObject) => itemObject.itemid === event.itemid)
   if (matchingItemObjectIndex === -1){

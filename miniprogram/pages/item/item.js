@@ -1,5 +1,8 @@
 // miniprogram/pages/item.js
 /**
+ * To display the item, the page accepts the itemID and type (NOTE: only pass in 'product', 'event' is deprecated)
+ *  through the parent page event called 'acceptDataFromOpenerPage'.
+ *  Data object should be {'id':str, 'type':"product"}
  * For the favorite functionality, pull the isFavorited boolean from the cloud database (user's favlist)
  *    Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
  *    Loading note: takes a while for isFavorited to be set.  
@@ -10,7 +13,12 @@
  * 
  * For the card pop up functionality, when the add to cart or buy now button is clicked in the itemTabBar component, the addToCart()
  * function here is triggered which sets displayPopUp = true and isTabBarHidden = true. The itemTabBar.js listens for any
- * change and will be able to get the isTabBarHidden = true in order to hide the component. 
+ * change and will be able to get the isTabBarHidden = true in order to hide the component.
+ * 
+ * To add item to cart, uploads itemid and quantity to the cloud function 'addItemToCart'
+ *    To handle race conditions, once addItemToCart is set, there is a global variable lock 'addItemLock' = true.
+ *    Once the addItemToCart function is completed, 'addItemLock' will be set to false.
+ *    If 'addItemLock' is true, shoppingCart.js will wait until the item has been successfully added 
  */
 const app = getApp();
 
@@ -30,7 +38,9 @@ Page({
     isTabBarHidden: false,
     displayPopUp: false,
     backgroundBlur : false,
-    //numCartItems : null (will be set in onLoad)
+    showPopUp : false,
+    //dotActive : null (will be set in onLoad and onShow only if coming from higher up page navigation)
+    //isFavorited : (will be set in setIsFavorited which is called onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
 
@@ -39,16 +49,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    //Upload number of cartItems
-    that.uploadNumCartItems();
+    //Upload the dot active boolean
+    that.uploadDotActive();
 
     //Set the tabbar Height to pass into the CustomTabBar component
     let tabbarHeight = app.globalData.tabbarHeight;
     this.setData({
       tabbarHeight
     });
+    console.log("tabbarHeight", this.data.tabbarHeight);
 
-    //Get the itemID and the type and set to local storage
+    //Get the itemID and the type from the parent page (product.js) and set to local storage
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', function(data){
       let id = data.id;
@@ -63,10 +74,50 @@ Page({
       that.uploadItemData(id, type);
       //Check if the item is favorited and set the isFavorited data
       that.setIsFavorited(id, type);
+
     });
 
   },
   onUnload: function(){
+    var that = this;
+    //Consider having a timeout to prevent race condition with clickHeart updating local boolean and updateIsFavorited uploading
+    //local boolean to cloud
+    setTimeout(() => that.updateIsFavorited(), 500);
+  },
+  onShow : async function(){
+    //Called onLoad and also when page comes from higher layer. Will upload the dotActive
+    //Wait until uploadDotActive in the onLoad has already called() and is not null before I recall the function
+        //I want to avoid a race condition where getUserCart is called twice and there are two records inited  
+    var that = this;
+    //Wait for dotActive to already be set
+    var dotActive;
+    var checkDotActive = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForDotActive(){
+          dotActive = that.data.dotActive;
+          if (dotActive == null){
+            //Continually loop until the data is set
+            setTimeout(waitForDotActive, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("onShow(): DotActive took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkDotActive();
+    //Upload dot active
+    that.uploadDotActive();
+    
+
+  },
+  onHide : function(){
     var that = this;
     //Consider having a timeout to prevent race condition with clickHeart updating local boolean and updateIsFavorited uploading
     //local boolean to cloud
@@ -88,7 +139,7 @@ Page({
           let itemImages = res.data.swiperImageUrls;
           let itemCategories = res.data.itemCategories;
           let descSummary = res.data.descSummary;
-          let coverImageSrc = res.data.imageUrl;
+          let thumbUrl = res.data.thumbUrl;
           console.log(itemImages);
           //Upload the data to the page data
           that.setData({
@@ -97,7 +148,7 @@ Page({
             itemImages: itemImages,
             itemCategories: itemCategories,
             descSummary : descSummary,
-            coverImageSrc : coverImageSrc  
+            thumbUrl : thumbUrl  
           });
         })
         .catch(err => console.error(err));
@@ -176,6 +227,7 @@ Page({
             isFavorited
           });
         })
+        //Query throws an error when trying to get data from a non-existent record
         .catch(function(err){
           //Need to initialize the user and add an empty favProducts list
           products.add({
@@ -191,49 +243,18 @@ Page({
             isFavorited: false
           })
         });
-
     } 
-    else if (type === 'event'){
-      //Query from the userFavProducts
-      const events = db.collection('userFavEvents');
-      events.doc(openID).get()
-        .then(function(res){
-          //User's favlist has been init
-          //Get user's list of favItems
-          let favEvents = res.data.favEvents;
-          //Check if item ID is in the favProducts
-          let isFavorited = favEvents.includes(itemID);
-          console.log("isFav", isFavorited);
-          that.setData({
-            isFavorited
-          });
-        })
-        .catch(function(err){
-          //Need to initialize the user and add an empty favEvents list
-          events.add({
-            data: {
-              _id: openID,
-              favEvents: []
-            }
-          })
-            .then(res => console.log("Successfully initialized user"))
-            .catch(err => console.error("Failed to initialize user", err));
-          //Set the isFavorited to page data as false
-          that.setData({
-            isFavorited: false
-          })
-        });
-    }
     else{
-      console.error("In setIsFavorited(): should only have either 'event' or 'product' type available");
+      console.error("In setIsFavorited(): should only have either 'product' type available");
     }
   },
   clickHeart: async function(){
+    //Note: Heart logo can only be clicked after isFavorited is set 
     var that = this;
     console.log("clickHeart()");
-    //Function is called when heart is clicked. Inverses the local page boolean
+    //Called when heart is clicked. Inverses the local page boolean
     //In order to prevent a race condition where pull data from isFavorited before isFavorited is set, wait
-    //until isFavorited != null.
+    //until isFavorited != null. Therefore, I know that the user's cart has been init by setIsFavorited()
     var checkIsFavoritedSet = function(){
       return new Promise(function(resolve, reject){
         var numLoops = 20;
@@ -302,23 +323,6 @@ Page({
           })
           .catch(err => console.error(err));
       } 
-      else if (itemType === 'event'){
-        db.collection('userFavEvents').doc(openID).get()
-          .then(function(res){
-            //add item if doesn't exist
-            var favEvents = res.data.favEvents;
-            if (!favEvents.includes(itemID)){
-              //Item doesn't exist, add itemID to the end of the array
-              db.collection('userFavEvents').doc(openID).update({
-                data: {
-                  favEvents : _.push(itemID) 
-                }
-              });
-            }
-            //item exists, do nothing
-          })
-          .catch(err => console.error(err));
-      }
       else{
         console.error("Should only be either 'product' or 'event");
       }
@@ -377,19 +381,21 @@ Page({
       console.log("User closed page before isFavorited set. No changes were made.");
     }
   },
-  uploadNumCartItems : async function(){
-    console.log("uploadNumCartItems()");
+  uploadDotActive : async function(){
+    console.log("dotActive()");
     //Function is called onload. Calculates the number of items in the user's cart and sets to local storage
-    //which will be passed to the itemTabBar for it to render the cart icon.
+    //the dotActive boolean which will be passed to the itemTabBar for it to render the cart icon.
     
     let cartResponse = await wx.cloud.callFunction({
       name: 'getUserCart'
     });
     let cartProducts = cartResponse.result.cartProducts;
     let numCartItems = cartProducts.length;
-    //Set the number to the local storage
+    let dotActive = numCartItems > 0;
+    console.log("dotActive is", dotActive);
+    //Set the boolean to the local storage
     this.setData({
-      numCartItems
+      dotActive
     });
   },
   tabBarAddToCart: function(e){
@@ -398,18 +404,27 @@ Page({
     //Change displayPopUp to true in order to show the popUp that allows user to choose quantity
     //Change backgroundBlur to true to blur out the background
     this.setData({
-      displayPopUp : true,
-      isTabBarHidden : true,
-      backgroundBlur : true
+      showPopUp : true
     });
   },
   quantityChange : function(e){
     //Function is triggered when the stepper quantity is increased
     //Upload the new quantity
+    console.log("quantity change()");
     this.setData({itemQuantity: e.detail});
   },
   addToCart : async function(e){
+    var that = this;
     //Function is triggered when the user clicks the addToCart button in the cardPopUp
+    //Show success toast and close the pop up
+    wx.showToast({
+      title: 'Added to cart',
+      icon:  'success',
+      duration : 1000,
+      success: that.popUpClose 
+    });
+    
+
     //Upload the item and the quantity to the cloud
     //Wait for the itemID
     var that = this;
@@ -438,8 +453,10 @@ Page({
 
     //Get the quantity that is in the vant stepper
     let itemQuantity = this.data.itemQuantity;
-    console.log("itemQuanitity is ", itemQuantity);
+    console.log("itemQuantity is ", itemQuantity);
     //Upload the item and itemQuantity to user's cart
+    //Set my addItemLock to prevent shoppingCart from getting userCart before item has been added
+    app.globalData.addItemLock = true;
     let result = await wx.cloud.callFunction({
       name : 'addItemToCart',
       data : {
@@ -447,18 +464,67 @@ Page({
         quantity : itemQuantity
       }
     });
+    console.log("ADDITEMTOCART() COMPLETED");
+    //Release lock since item has been added
+    app.globalData.addItemLock = false;
 
   },
-  clickClose : function(e){
-    //Function is called when the close button is tapped.
-    //Should set displayPopUp to false, isTabBarHidden to false, and backgroundBlur to false to undo everything
-
-    console.log("clickClose()");
-    this.setData({
-      displayPopUp : false,
-      isTabBarHidden : false,
-      backgroundBlur : false
+  buyNow : async function(e){
+    //Called when user clicks on the buy now button in the popup. Redirects to shopping page and uploads the item and quantity
+    //Shopping page will wait for item to be added (see below)
+    wx.navigateTo({
+      url: '../../pages/shoppingCart/shoppingCart',
     });
+    //Close the pop up
+    this.popUpClose();
+
+    //Upload the item and the quantity to the cloud
+    //Wait for the itemID
+    var that = this;
+    var checkItemID = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForItemID(){
+          var itemID = that.data.itemID;
+          if (itemID == null){
+            //Continually loop until the data is set
+            setTimeout(waitForItemID, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("setisFavorited(): openID took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkItemID();
+    var itemID = this.data.itemID;
+
+    //Get the quantity that is in the vant stepper
+    let itemQuantity = this.data.itemQuantity;
+    console.log("itemQuantity is ", itemQuantity);
+    //Upload the item and itemQuantity to user's cart
+    //Set my addItemLock to prevent shoppingCart from getting userCart before item has been added
+    app.globalData.addItemLock = true;
+    let result = await wx.cloud.callFunction({
+      name : 'addItemToCart',
+      data : {
+        itemid : itemID,
+        quantity : itemQuantity
+      }
+    });
+    //Release the lock
+    app.globalData.addItemLock = false;
+    console.log("ADDITEMTOCART() COMPLETED and set to true");
+
+  },
+  popUpClose : function(e){
+    //Called when the user clicks the x button of the popup
+    this.setData({showPopUp : false});
   }
 
   
