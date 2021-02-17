@@ -5,22 +5,20 @@ Page({
    * Page initial data
    */
   data: {
-    subTotal: 0
+
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    console.log("options carried over", options)
-    this.data.subTotal = options.subtotal
-    console.log(data)
+
   },
   pay: function(event){
     //Send 0.1 yuan to Laotu.
     wx.cloud.callFunction({
     name: 'cloudPay',
-    data: {total_fee: this.data.subTotal}
+    data: {total_fee: 1}
     }).then(res => {
       wx.requestPayment({
         nonceStr: res.result.data.nonceStr,
