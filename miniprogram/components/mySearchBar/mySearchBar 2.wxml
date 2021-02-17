@@ -1,0 +1,23 @@
+<view class="weui-search-bar {{searchState ? 'weui-search-bar_focusing' : ''}} {{extClass}}">
+  <!--Searchbar itself and the hide text button are both -->
+  <view bindtap="tapped" class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+          <icon class="weui-icon-search" type="search" size="12"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="{{placeholder}}" value="{{value}}" focus="{{focus}}" bindblur="inputBlur" bindfocus="inputFocus" bindinput="inputChange" />
+          <text class="weui-icon-clear" hover-class="weui-active" wx:if="{{value.length > 0}}" bindtap="clearInput"></text>
+      </view>
+      <label class="weui-search-bar__label" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="12"></icon>
+          <text class="weui-search-bar__text">Search</text>
+      </label>
+  </view>
+  <view wx:if="{{cancel && searchState}}" class="weui-search-bar__cancel-btn" bindtap="hideInput">{{cancelText}}</view>
+</view>
+
+<view class="results" wx:if="{{searchState && result.length > 0}}">
+  <view class="result" bindtap="selectResult" data-index="{{index}}" wx:for="{{result}}" wx:key="index">
+    <!--DEV note: need to change the CSS-->
+    <icon class="smallIcon" type="search" size="14"></icon>
+    <view>{{item.text}}</view>
+  </view>
+</view>

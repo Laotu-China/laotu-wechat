@@ -1,0 +1,19 @@
+<!-- Contains the image and the description box-->
+<view class="itemCardContainer">
+  <!--Contains the image-->
+  <view class="leftContainer">
+    <image class="thumbImage" mode="aspectFill" src="{{imageSrc}}"></image>
+  </view>
+  <!--Contains the description-->
+  <view class="rightContainer">
+    <view class="topRowContainer">
+      <slot name="topRow"></slot>
+    </view>
+    <view class="bodyRowContainer">
+      <slot name="bodyRow"></slot>
+    </view>
+    <view class="bottomRowContainer">
+      <slot name="bottomRow"></slot>
+    </view>
+  </view>
+</view>

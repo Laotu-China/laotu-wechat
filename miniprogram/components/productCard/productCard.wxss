@@ -1,0 +1,67 @@
+/* components/itemCard.wxss */
+view{
+  box-sizing: border-box;
+}
+
+.itemCardContainer{
+  /* NOTE: the itemCard component should be in a container with desired size and should have
+      <itemCard style="width: 100%;/> */
+  height: 12rem;
+  width: 100%;
+  display: flex;
+  /*background-color: orange;*/
+}
+
+.leftContainer{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /*background-color: #EBE6E5;*/
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+
+.thumbImage{
+  /* Fix the size of the image container */
+  width: 100%;
+  flex: 1 0 10px;
+  background-color: teal;
+}
+
+.rightContainer{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /*background-color: #DFD8DC;*/
+  overflow: hidden;
+  padding: 1rem 1rem;
+}
+.topRowContainer{
+  width: 100%;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  color: #191919;
+  overflow: hidden;
+  /*background-color: springgreen;*/
+  /*Have max-fontsize with vh trick */
+}
+.bodyRowContainer{
+  width: 100%;
+  /* Body takes up the rest of the container */
+  flex: 1 0 3rem;
+  display: block;
+  color: #404040;
+  font-size: 0.9rem;
+  /*background-color: steelblue;*/
+}
+.bottomRowContainer{
+  width: 100%;
+  /*background-color: teal;*/
+  height: 4rem;
+  font-size: 1.5rem;
+  color: red;
+}
