@@ -13,43 +13,43 @@
     "pages/itemTabBarTemp/itemTabBarTemp",
     "pages/events/events",
     "pages/profile/profile",
-    "pages/shoppingCart/shoppingCart"
+    "pages/shoppingCart/shoppingCart",
+    "pages/checkout/checkout",
+    "pages/editShippingInfo/editShippingInfo",
+    "pages/testUI/testUI",
+    "pages/eventItem/eventItem",
+    "pages/myorders/myorders"
   ],
   "window": {
-    "navigationStyle": "custom",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFFF00",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "backgroundColor": "#FFFFFE",
-    "borderStyle": "#D3D3D3",
-    "selectedColor": "#D03232",
-    "color": "#131313",
+    "selectedColor": "#131313",
+    "color": "#ADADAD",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "img/home.png",
-        "selectedIconPath": "img/home.png",
+        "iconPath": "weUISvg/home-o.png",
+        "selectedIconPath": "weUISvg/home.png",
         "text": "Home"
       },
       {
         "pagePath": "pages/events/events",
-        "iconPath": "img/event.png",
-        "selectedIconPath": "img/event.png",
+        "iconPath": "weUISvg/tag-o.png",
+        "selectedIconPath": "weUISvg/tag.png",
         "text": "Event"
       },
       {
         "pagePath": "pages/product/product",
-        "iconPath": "img/store.jpg",
-        "selectedIconPath": "img/store.jpg",
+        "iconPath": "weUISvg/shop-o.png",
+        "selectedIconPath": "weUISvg/shop.png",
         "text": "Store"
       },
       {
         "pagePath": "pages/profile/profile",
-        "iconPath": "img/profile.png",
-        "selectedIconPath": "img/profile.png",
+        "iconPath": "weUISvg/me-o.png",
+        "selectedIconPath": "weUISvg/me.png",
         "text": "My Profile"
       }
     ]
