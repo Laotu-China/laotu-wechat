@@ -44,7 +44,7 @@ Page({
     console.log("orders", orders);
     //Note: if orders is empty, upload an empty orderObjects array
     if (orders.length < 1){
-      that.setData({allOrderObjects : []})
+      this.setData({allOrderObjects : []})
       return;
     }
     else{
