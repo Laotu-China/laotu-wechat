@@ -1,9 +1,6 @@
 <!--miniprogram/pages/addUserInfo.wxml-->
-<view wx:if="{{setUserInfo}}">
-  <CustomNav isBoth="{{true}}" title="Default Info"></CustomNav>
-</view>
-<view wx:else>
-  <CustomNav isBack="{{true}}" title="Edit Info"></CustomNav>
+<view>
+  <CustomNav isBack="{{true}}" title="编辑地址"></CustomNav>
 </view>
 
 <view id="bodyContainer" class="viewPadding">
@@ -34,6 +31,7 @@
         placeholder="Enter your phone number" />
     </mp-cell>
   </mp-form>
+  <checkbox bindtap="bindUserInfoChange" checked="{{setUserInfo}}">设置为默认地址</checkbox>
   <!--Contains the Confirm button. Note: 10% from the bottom-->
   <view id="buttonContainer">
     <button class="weui-btn" type="primary" bindtap="submitForm">Confirm</button>
