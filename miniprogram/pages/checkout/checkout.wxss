@@ -29,7 +29,7 @@ page{
   flex-direction: column;
 }
 #cardContainer{
-  height: 30vh;
+  height: 20vh;
   width: 100%;
   border-radius: 10px;
   background-color: yellow;
@@ -95,4 +95,7 @@ page{
   display: flex;
   justify-content: space-between;
 }
-
+checkouttabbar {
+  position: sticky;
+  bottom: 0;
+}
