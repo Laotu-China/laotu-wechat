@@ -19,6 +19,7 @@ view{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /*background-color: #EBE6E5;*/
   padding: 2rem 1rem;
   overflow: hidden;
 }
