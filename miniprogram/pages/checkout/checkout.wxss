@@ -18,16 +18,15 @@ page{
   display: flex;
   width: 100%;
   flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
 }
 #titleContainer{
   border-bottom: 7rpx solid black;
   font-size: 25px;
   font-weight: bold;
 }
-#productCardsContainer{
-  display: flex;
-  flex-direction: column;
-}
+
 #cardContainer{
   height: 20vh;
   width: 100%;
@@ -71,16 +70,12 @@ page{
 }
 
 #orderDetailsContainer{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background-color: white;
   border-radius: 5px;
 }
 
 #orderPriceContainer{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background-color: white;
   border-radius: 5px;
