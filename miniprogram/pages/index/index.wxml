@@ -73,8 +73,8 @@
               <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
             </view>
             <view class="productDescContainer spacedVerticalContainer sidePadding">
-              <view class="spacedVerticalElement" style="font-weight: 525;color:#202020">
-                <text>{{productObject.title}}</text>
+              <view class="spacedVerticalElement" style="font-weight: 525;color:#202020; white-space: normal;">
+                {{productObject.title}}
               </view>
               <view class="spacedVerticalElement" style="font-weight: 550; color:red; font-size: 20px;">
                 <text>¥{{productObject.price}}</text>
