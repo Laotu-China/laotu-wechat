@@ -76,6 +76,9 @@ Page({
     let phoneNumber = e.detail.value;
     this.setData({phoneNumber})
   },
+  bindUserInfoChange: function(e) {
+    this.setData({setUserInfo: !this.data.setUserInfo})
+  },
   submitForm : async function(e){
     //Called when user clicks confirm button
     //Verify whether or not the input is valid

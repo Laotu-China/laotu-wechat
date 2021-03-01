@@ -18,18 +18,17 @@ page{
   display: flex;
   width: 100%;
   flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
 }
 #titleContainer{
   border-bottom: 7rpx solid black;
   font-size: 25px;
   font-weight: bold;
 }
-#productCardsContainer{
-  display: flex;
-  flex-direction: column;
-}
+
 #cardContainer{
-  height: 30vh;
+  height: 20vh;
   width: 100%;
   border-radius: 10px;
   background-color: yellow;
@@ -71,16 +70,12 @@ page{
 }
 
 #orderDetailsContainer{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background-color: white;
   border-radius: 5px;
 }
 
 #orderPriceContainer{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background-color: white;
   border-radius: 5px;
@@ -95,4 +90,7 @@ page{
   display: flex;
   justify-content: space-between;
 }
-
+checkouttabbar {
+  position: sticky;
+  bottom: 0;
+}

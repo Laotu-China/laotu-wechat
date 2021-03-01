@@ -294,6 +294,11 @@ Page({
       url: '../../pages/checkout/checkout?subtotal=' + e.currentTarget.dataset.subtotal,
     });
   },
+  clickContinueShopping: function () {
+    wx.switchTab({
+      url: '../../pages/product/product',
+    })
+  },
   clickTrash: async function(e){
     //Called when the trash icon in the card is clicked. 
     //Change the card's isHidden attribute to true

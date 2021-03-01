@@ -96,3 +96,6 @@ page{
   padding: 0rem 1rem;
   margin-top: 2rem; 
 }
+#aboveRow {
+  margin-bottom: -75rpx;
+}

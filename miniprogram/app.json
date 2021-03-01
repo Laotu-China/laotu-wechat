@@ -54,9 +54,5 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json",
-  "useExtendedLib": {
-    "kbone": false,
-    "weui": false
-  }
+  "sitemapLocation": "sitemap.json"
 }

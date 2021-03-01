@@ -1,6 +1,6 @@
 <!--miniprogram/pages/addUserInfo.wxml-->
 <CustomNav isBoth="{{true}}" title="My Orders"></CustomNav>
-<view id="bodyContainer" class="viewPadding">
+<view wx:if="{{allOrderObjects == undefined || allOrderObjects.length > 0}}" id="bodyContainer" class="viewPadding">
   <itemCard wx:for="{{allOrderObjects}}" imageSrc="{{item.thumbUrl}}" style="width: 100%;">
     <view slot="topRow">
       <view style="height: 100%; width: 100%;">{{item.title}}</view>
@@ -18,3 +18,4 @@
     </view>
   </itemCard>
 </view>
+<view wx:else style="text-align: center;">暂无订单哦~</view>

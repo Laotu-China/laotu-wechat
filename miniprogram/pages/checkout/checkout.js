@@ -347,14 +347,14 @@ Page({
         //Upload the order information to the userInfo
         var currentDateTime = util.formatTime(new Date());
         var currentOrderObject = {
-          streetName: this.data.streetName,
-          phoneNumber : this.data.phoneNumber,
-          phoneCode : this.data.phoneCode,
-          name : this.data.name,
-          regionCityDistrictArray : this.data.regionCityDistrictArray,
-          totalPrice : this.data.orderTotal,
-          cartQuantityObjects : this.data.cartQuantityObjects,
-          cartDetailObjects : this.data.cartDetailObjects,
+          streetName: that.data.streetName,
+          phoneNumber : that.data.phoneNumber,
+          phoneCode : that.data.phoneCode,
+          name : that.data.name,
+          regionCityDistrictArray : that.data.regionCityDistrictArray,
+          totalPrice : that.data.orderTotal,
+          cartQuantityObjects : that.data.cartQuantityObjects,
+          cartDetailObjects : that.data.cartDetailObjects,
           dateTime : currentDateTime  
         };
         wx.cloud.callFunction({
