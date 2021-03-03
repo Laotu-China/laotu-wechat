@@ -44,7 +44,6 @@ exports.main = async (event, context) => {
   let name = event.name;
   let streetName = event.streetName;
   let regionCityDistrictArray = event.regionCityDistrictArray;
-  let phoneCode = event.phoneCode;
   let phoneNumber = event.phoneNumber;
   //Check for validity
   if (name.length < 1 || streetName.length < 1 || phoneNumber.length < 1){
@@ -55,11 +54,11 @@ exports.main = async (event, context) => {
       _openid : openID
     }).update({
       data: {
-        shippingInfo : {name : name, 
-          streetName : streetName,
-          regionCityDistrictArray : regionCityDistrictArray,
-          phoneCode : phoneCode,
-          phoneNumber : phoneNumber
+        shippingInfo : {
+            name : name, 
+            streetName : streetName,
+            regionCityDistrictArray : regionCityDistrictArray,
+            phoneNumber : phoneNumber
           }
       }
     });
