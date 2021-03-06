@@ -1,13 +1,13 @@
 <!--components/itemTabBar.wxml-->
 <view wx:if="{{!_isTabBarHidden}}" class="tabbarContainer" style="height: {{tabbarHeight}}px; width: 750rpx; display: {{false ? 'none' : 'flex'}};">
   <view>
-    <vant-goods-action-icon icon="wap-home-o" text="Home" icon-class="iconCustom" link-type="switchTab" url="../../pages/index/index"></vant-goods-action-icon>
-    <vant-goods-action-icon icon="service-o" text="Help" icon-class="iconCustom" open-type="contact" bindcontact="handleContact"></vant-goods-action-icon>
+    <vant-goods-action-icon icon="wap-home-o" text="主页" icon-class="iconCustom" link-type="switchTab" url="../../pages/index/index"></vant-goods-action-icon>
+    <vant-goods-action-icon icon="service-o" text="客服" icon-class="iconCustom" open-type="contact" bindcontact="handleContact"></vant-goods-action-icon>
     <!-- _numItems is a value that is set by numItems which is passed in from the parent page. Only the parent changes the value-->
-    <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom" bindtap="clickCartIcon" dot="{{_dotActive}}"></vant-goods-action-icon>
+    <vant-goods-action-icon icon="cart-o" text="购物车" icon-class="iconCustom" bindtap="clickCartIcon" dot="{{_dotActive}}"></vant-goods-action-icon>
   </view>
   <view class="buttonsContainer">
-    <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="Add to Cart" bindtap="addItem"></vant-goods-action-button>
+    <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="添加到购物车" bindtap="addItem"></vant-goods-action-button>
   </view>
 </view>
 <!--Add this because the tabbar is fixed and so its height isn't recognized

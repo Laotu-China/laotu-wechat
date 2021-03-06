@@ -1,6 +1,6 @@
 <!--This page is the equivalent of item.wxml. It displays the event and has a button that allows the 
     user to connect with Laotu customer service-->
-<CustomNavBar isBack ="{{true}}"></CustomNavBar>
+<CustomNavBar isBack ="{{true}}" title="活动详情"></CustomNavBar>
 <!-- The background page should be blurred if backgroundBlur == true-->
 <view id="bodyContainer">
   <!-- Add the sliding image component-->
@@ -37,6 +37,6 @@
   </view>
 </view>
 <view id="chatButtonContainer">
-  <button open-type="contact" type="primary">Chat With Staff!</button>
+  <button open-type="contact" type="primary">联系客服</button>
 </view>
 

@@ -26,7 +26,7 @@
     </view> 
     <view id="tableContainer" class="spacedVerticalElement">
       <vant-cell-group>
-        <vant-cell title="历史订单" is-link size="large" link-type="navigateTo" url="../myorders/myorders"></vant-cell>
+        <vant-cell title="我的订单" is-link size="large" link-type="navigateTo" url="../myorders/myorders"></vant-cell>
         <vant-cell title="购物车" is-link size="large" link-type="navigateTo" url="../shoppingCart/shoppingCart"></vant-cell>
         <vant-cell title="收藏夹" is-link size="large" link-type="navigateTo" url="../favorites/favorites"></vant-cell>
         <vant-cell title="编辑收货地址" is-link size="large" link-type="navigateTo" url="../editShippingInfo/editShippingInfo?setUserInfo=true"></vant-cell>

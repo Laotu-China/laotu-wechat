@@ -49,7 +49,6 @@ view{
 }
 .topRowContainer{
   width: 100%;
-  height: 20%;
   /*background-color: springgreen;*/
   /*Have max-fontsize with vh trick */
 }

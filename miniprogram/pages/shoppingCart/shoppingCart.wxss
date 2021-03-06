@@ -80,8 +80,7 @@ page{
 }
 
 #priceContainer{
-  display: flex;
-  justify-content: space-between;
+  float: right;
 }
 #subTotalPriceText{
   font-size: 20px;
@@ -93,7 +92,7 @@ page{
   /*display: flex;
   flex-direction: column;*/
   align-items: center;
-  padding: 0rem 1rem;
+  padding: 2rem 1rem;
   margin-top: 2rem; 
 }
 #aboveRow {

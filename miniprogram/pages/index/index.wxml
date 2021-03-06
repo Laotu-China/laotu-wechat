@@ -1,4 +1,4 @@
-<CustomNav title="Laotu"></CustomNav>
+<CustomNav title="老土"></CustomNav>
 <view id="bodyContainer" class="spacedVerticalContainer sidePadding">
   <view id="aboveSwiperContainer" class="spacedVerticalElement">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
@@ -28,7 +28,7 @@
   </view>-->
   <view id="featureEventsContainer" class="spacedVerticalElement">
     <view class="featureTitleRow viewPadding aboveRow" bindtap="clickEventsMore" >
-      <text>Featured Events</text>
+      <text>推荐活动</text>
       <view hover-class="hoverClass" hover-stay-time="{{200}}">
         <vant-icon name="arrow"></vant-icon>
       </view>
@@ -58,7 +58,7 @@
   </view>
   <view id="featureProductsContainer" class="spacedVerticalElement">
     <view class="featureTitleRow viewPadding aboveRow" bindtap="clickProductsMore">
-      <text>Featured Products</text>
+      <text>推荐产品</text>
       <view hover-class="hoverClass" hover-stay-time="{{200}}">
         <vant-icon name="arrow"></vant-icon>
       </view>

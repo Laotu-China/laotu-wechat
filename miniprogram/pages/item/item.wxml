@@ -2,7 +2,7 @@
 <import src="../../components/itemTabBar/itemTabBar.wxml"></import>
 <import src="../template/template.wxml"></import>
 
-<CustomNavBar isBack ="{{true}}"></CustomNavBar>
+<CustomNavBar isBack ="{{true}}" title="商品详情"></CustomNavBar>
 <!-- The background page should be blurred if backgroundBlur == true-->
 <view id="bodyContainer">
   <!-- Add the sliding image component-->
@@ -72,7 +72,5 @@
     <!--DEV: Figure out how to customize the button (weUI? button css?)-->
       <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="Add to Cart" bindtap="addToCart"></vant-goods-action-button>
       <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="Buy Now" bindtap="buyNow"></vant-goods-action-button>
-   
-    
   </view>
 </vant-popup>

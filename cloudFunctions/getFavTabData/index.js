@@ -88,10 +88,10 @@ exports.main = async (event, context) => {
   
   //Create our tabData object
   var favTabData = [{
-    title: "Events",
+    title: "活动",
     data: favEvents
   },{
-    title: "Products",
+    title: "商品",
     data: favProducts
   }];
 

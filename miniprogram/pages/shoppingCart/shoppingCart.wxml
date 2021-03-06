@@ -2,7 +2,7 @@
 <CustomNav isBack="{{true}}"></CustomNav>
 <!-- Display a loading document until both cartDetailObjects and cartQuantityObjects are uploaded-->
 <view wx:if="{{pageReady}}" id="bodyContainer" class="spacedVerticalContainer sidePadding">
-  <view id="titleContainer" class="spacedVerticalElement">Shopping Cart</view>
+  <view id="titleContainer" class="spacedVerticalElement">购物车</view>
   <!--Container contains all of the product cards-->
   <view id="productCardsContainer" class="spacedVerticalContainer spacedVerticalElement">
     <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
@@ -38,13 +38,12 @@
   </view>
   <view style="display: block; width: 100%;">
     <view wx:if="{{numCartItems > 0}}"id="priceContainer" class="spacedVerticalElement">
-      <text>Sub total</text>
-      <text id="subTotalPriceText">¥{{subTotal}}</text>
+      <text id="subTotalPriceText">商品总价：¥{{subTotal}}</text>
     </view>
     <view id="buttonsContainer" class="spacedVerticalContainer">
       <!--Only render checkout button if there are items in the cart-->
-      <vant-button wx:if="{{numCartItems > 0}}" type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">Checkout</vant-button>
-      <view class="spacedVerticalElement" bindtap="clickContinueShopping" style="text-align: center;">Continue shopping</view>
+      <vant-button wx:if="{{numCartItems > 0}}" type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">结算</vant-button>
+      <view class="spacedVerticalElement" bindtap="clickContinueShopping" style="text-align: center;">继续购物</view>
     </view>
   </view>
   <!--Contains the checkout and the return back button. Note margin-bottom: 10%;-->

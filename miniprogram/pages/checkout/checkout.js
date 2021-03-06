@@ -125,7 +125,6 @@ Page({
         district : shippingInfo.regionCityDistrictArray[2],
         province : shippingInfo.regionCityDistrictArray[0],
         phoneNumber : shippingInfo.phoneNumber,
-        phoneCode : shippingInfo.phoneCode,
         name : shippingInfo.name ,
         regionCityDistrictArray : shippingInfo.regionCityDistrictArray            
         });
@@ -352,7 +351,7 @@ Page({
           phoneCode : that.data.phoneCode,
           name : that.data.name,
           regionCityDistrictArray : that.data.regionCityDistrictArray,
-          totalPrice : that.data.orderTotal,
+          totalPrice : that.data.totalFee,
           cartQuantityObjects : that.data.cartQuantityObjects,
           cartDetailObjects : that.data.cartDetailObjects,
           dateTime : currentDateTime  

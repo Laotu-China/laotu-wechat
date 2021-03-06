@@ -1,4 +1,4 @@
-<CustomNav title="Events"></CustomNav>
+<CustomNav title="活动"></CustomNav>
 <!--Set isNavigator to true so clicking on the result will open a searchPage-->
 <!--<CustomSearch type="event" isNavigator="{{true}}" searchObjectsArray="{{eventsArray}}"></CustomSearch>-->
 <view id="bodyContainer">

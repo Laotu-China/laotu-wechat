@@ -1,6 +1,6 @@
 <!--miniprogram/product.wxml
     Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
-<CustomNav title="Products"/>
+<CustomNav title="商店"/>
 <!--bodyContainer has no padding- productBody functions as the body container and has padding-->
 
 <view id="bodyContainer">

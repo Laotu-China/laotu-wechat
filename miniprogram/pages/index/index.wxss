@@ -17,12 +17,12 @@ page{
 #aboveSwiperContainer{
   height: 30vh;
   width: 100%;
-  background-color: #E7CBA9;
+  background-color: #bb3033;
 }
 
 #belowSwiperContainer{
   height: 20vh;
-  background-color: #EEBAB2;
+  background-color: #bb3033;
 }
 
 #featureEventsContainer{
@@ -36,9 +36,13 @@ page{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: #F1DEDC;
+  background-color: #bb3033;
   font-size: 1.25rem;
   font-weight: 500;
+  color: white;
+}
+.featureTitleRow text {
+  color: white;
 }
 .swiperContainer{
   width: 100%;

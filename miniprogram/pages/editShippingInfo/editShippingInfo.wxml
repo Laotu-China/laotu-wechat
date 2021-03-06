@@ -6,7 +6,7 @@
 <view id="bodyContainer" class="viewPadding">
   <mp-form id="form">
     <mp-cell prop="name" title="收货人" ext-class="">
-      <input bindinput="nameInputChange" data-field="name" class="weui-input" placeholder="名字" />
+      <input bindinput="nameInputChange" data-field="name" class="weui-input" placeholder="名字" value="{{name}}" />
     </mp-cell>
     <!--Contains the picker for the ['region', 'city', 'district']-->
     <view class="weui-cell weui-cell_select">
@@ -24,11 +24,11 @@
     </view>
     <mp-cell prop="streetName" title="详细地址" ext-class="">
       <input bindinput="streetInputChange" data-field="streetName" class="weui-input"
-        placeholder="街道、小区" />
+        placeholder="街道、小区" value="{{streetName}}"/>
     </mp-cell>
     <mp-cell prop="phoneNumber" title="手机号码" ext-class="">
       <input bindinput="mobileInputChange" data-field="mobile" type="number" maxlength="11" class="weui-input"
-        placeholder="手机号" />
+        placeholder="手机号" value="{{phoneNumber}}"/>
     </mp-cell>
   </mp-form>
   <checkbox bindtap="bindUserInfoChange" checked="{{setUserInfo}}">设置为默认地址</checkbox>

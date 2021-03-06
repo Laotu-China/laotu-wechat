@@ -32,25 +32,25 @@
         "pagePath": "pages/index/index",
         "iconPath": "weUISvg/home-o.png",
         "selectedIconPath": "weUISvg/home.png",
-        "text": "Home"
+        "text": "主页"
       },
       {
         "pagePath": "pages/events/events",
         "iconPath": "weUISvg/tag-o.png",
         "selectedIconPath": "weUISvg/tag.png",
-        "text": "Event"
+        "text": "活动"
       },
       {
         "pagePath": "pages/product/product",
         "iconPath": "weUISvg/shop-o.png",
         "selectedIconPath": "weUISvg/shop.png",
-        "text": "Store"
+        "text": "商店"
       },
       {
         "pagePath": "pages/profile/profile",
         "iconPath": "weUISvg/me-o.png",
         "selectedIconPath": "weUISvg/me.png",
-        "text": "My Profile"
+        "text": "个人"
       }
     ]
   },
