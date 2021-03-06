@@ -27,7 +27,7 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     console.log("editShippingInfo options", options);
     let setUserInfo = options.setUserInfo;
     //Upload the boolean setUserInfo which will determine where to upload the data
@@ -36,6 +36,35 @@ Page({
     }
     else{
       this.setData({setUserInfo : false});
+    }
+    let userInfoResp = await wx.cloud.callFunction({
+      name : 'getUserInfo'
+    });
+    let userInfo = userInfoResp.result.userInfo[0];
+    let shippingInfo = userInfo.shippingInfo;
+    console.log(userInfo);
+    //Check if the shippingInfo is empty (will either be {} or complete due to the tests in editShoppingInfo)
+    var shippingInfoComplete;
+    if (shippingInfo == null){
+      shippingInfoComplete = false;
+    }
+    else if (Object.values(shippingInfo).length < 1){
+      shippingInfoComplete = false;
+    }
+    else{
+      shippingInfoComplete = true;
+    }
+    //If complete, upload the streetName, the city, the district, and the name
+    if (shippingInfoComplete){
+      this.setData({
+        streetName: shippingInfo.streetName,
+        city : shippingInfo.regionCityDistrictArray[1],
+        district : shippingInfo.regionCityDistrictArray[2],
+        province : shippingInfo.regionCityDistrictArray[0],
+        phoneNumber : shippingInfo.phoneNumber,
+        name : shippingInfo.name ,
+        regionCityDistrictArray : shippingInfo.regionCityDistrictArray            
+        });
     }
     //start with shippingInfoEdit = false in case the user never hits the submit button
     app.globalData.shippingInfoEdited = false;
