@@ -86,3 +86,6 @@ page{
   right: 0;
   padding: 0rem 1rem;
 }
+#chatButtonContainer button {
+  background-color: #bb3033;
+}

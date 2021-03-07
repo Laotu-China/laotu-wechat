@@ -7,7 +7,7 @@
  *    the edit was successful.
  * If page fails to set, upload 'shippingInfoEdit' : false to show that edit failed.
  * Parent page that navigates to this must pass '?setUserInfo=boolean' in the navigateTo URL
- * shippingInfo : {name : str, streetName : str, phoneCode : Number, phoneNumber: string,
+ * shippingInfo : {name : str, streetName : str, phoneNumber: string,
  *                 regionCityDistrictArray : ['regionStr', 'cityStr', 'districtStr']}     
  */
 var app = getApp();
@@ -18,8 +18,6 @@ Page({
    * Page initial data
    */
   data: {
-    countryCodes : ['+86','+80','+84','+87'], //represent the phone number country code used in picker
-    countryCodeIndex : 0,
     regionCityDistrictArray:  ["北京市", "北京市", "东城区"], //first ['region', 'city', 'district']
     name: '',
     streetName : '',
@@ -29,7 +27,7 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     console.log("editShippingInfo options", options);
     let setUserInfo = options.setUserInfo;
     //Upload the boolean setUserInfo which will determine where to upload the data
@@ -39,19 +37,41 @@ Page({
     else{
       this.setData({setUserInfo : false});
     }
+    let userInfoResp = await wx.cloud.callFunction({
+      name : 'getUserInfo'
+    });
+    let userInfo = userInfoResp.result.userInfo[0];
+    let shippingInfo = userInfo.shippingInfo;
+    console.log(userInfo);
+    //Check if the shippingInfo is empty (will either be {} or complete due to the tests in editShoppingInfo)
+    var shippingInfoComplete;
+    if (shippingInfo == null){
+      shippingInfoComplete = false;
+    }
+    else if (Object.values(shippingInfo).length < 1){
+      shippingInfoComplete = false;
+    }
+    else{
+      shippingInfoComplete = true;
+    }
+    //If complete, upload the streetName, the city, the district, and the name
+    if (shippingInfoComplete){
+      this.setData({
+        streetName: shippingInfo.streetName,
+        city : shippingInfo.regionCityDistrictArray[1],
+        district : shippingInfo.regionCityDistrictArray[2],
+        province : shippingInfo.regionCityDistrictArray[0],
+        phoneNumber : shippingInfo.phoneNumber,
+        name : shippingInfo.name ,
+        regionCityDistrictArray : shippingInfo.regionCityDistrictArray            
+        });
+    }
     //start with shippingInfoEdit = false in case the user never hits the submit button
     app.globalData.shippingInfoEdited = false;
     
   },
   onChange : function(event){
     console.log(event.detail);
-  },
-  bindCountryCodeChange : function(e){
-    //Called whenever the user clicks on a different index in the picker options. 
-    //Upload code index for picker and also picker value
-    console.log('picker country index', e.detail.value);
-    this.setData({countryCodeIndex : e.detail.value});
-    this.setData({phoneCode : this.data.countryCodes[e.detail.value]});
   },
   bindRegionChange: function (e) {
     //Called whenever user selects a certain region
@@ -86,10 +106,7 @@ Page({
     let name = this.data.name;
     let streetName = this.data.streetName;
     let phoneNumber = this.data.phoneNumber;
-    let phoneCode = this.data.countryCodes[this.data.countryCodeIndex];
     let regionCityDistrictArray = this.data.regionCityDistrictArray;
-
-    console.log("phoneCode is: ", phoneCode);
 
     //Make sure that all input have some length
     if (name.length < 1 || streetName.length < 1 || phoneNumber.length < 1){
@@ -115,10 +132,17 @@ Page({
     else{
       //Test passed. Upload data and show a success icon.
       wx.showToast({
-        title : "Updated",
+        title : "保存成功",
         icon: "success",
         duration: 1000
       });
+
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1,
+        });
+      }, 1000);
+
       //If setUserInfo is true, upload to user's shippingInfo
       if (this.data.setUserInfo === true){
         //Upload the user's info to the cloud, under 'userInfo'
@@ -128,7 +152,6 @@ Page({
             name : name, 
             streetName : streetName,
             regionCityDistrictArray : regionCityDistrictArray,
-            phoneCode : phoneCode,
             phoneNumber : phoneNumber
           }
         });
@@ -141,7 +164,6 @@ Page({
           name : name, 
           streetName : streetName,
           regionCityDistrictArray : regionCityDistrictArray,
-          phoneCode : phoneCode,
           phoneNumber : phoneNumber
         };
       }

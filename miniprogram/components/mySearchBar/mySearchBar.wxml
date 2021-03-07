@@ -8,7 +8,7 @@
       </view>
       <label class="weui-search-bar__label" bindtap="showInput">
           <icon class="weui-icon-search" type="search" size="12"></icon>
-          <text class="weui-search-bar__text">Search</text>
+          <text class="weui-search-bar__text">搜索</text>
       </label>
   </view>
   <view wx:if="{{cancel && searchState}}" class="weui-search-bar__cancel-btn" bindtap="hideInput">{{cancelText}}</view>

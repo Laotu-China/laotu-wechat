@@ -62,5 +62,4 @@ view{
   /*background-color: teal;*/
   height: 4rem;
   font-size: 1.5rem;
-  color: red;
 }

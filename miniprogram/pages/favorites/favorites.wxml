@@ -1,4 +1,4 @@
-<CustomNav isBoth="{{true}}" title="Favorites"></CustomNav>
+<CustomNav isBoth="{{true}}" title="收藏夹"></CustomNav>
 <view id="bodyContainer">
   <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
     <block wx:for="{{tabs}}" wx:key="unique3">

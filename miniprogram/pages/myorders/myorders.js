@@ -64,29 +64,34 @@ Page({
       }
 
       //Function takes in an order and creates an array of order objects for that particular order
-      var createOrderObjectsFromOrder = function(order){
+      var createOrderObjectFromOrder = function(order){
         let cartQuantityObjects = order.cartQuantityObjects;
         let cartDetailObjects = order.cartDetailObjects;
         let dateTimeStr = order.dateTimeStr;
         //For each cartQuantityObject, use the itemID to find the corresponding cartDetailObject and add
         //the title and thumbUrl. We also add the dateTimeStr
-        var orderObjects = cartQuantityObjects.map(function(quantObj){
+        var orderItems = cartQuantityObjects.map(function(quantObj){
           let itemID = quantObj.itemid;
           //See helper function doc above
           let titleUrlPrice = getTitleUrlPrice(itemID, cartDetailObjects);
           //Now we create our object by taking the quantObj and adding title, thumbUrl, and price key values 
           return {...quantObj, ...titleUrlPrice}
         });
-        console.log("orderObjects", orderObjects);
-        return orderObjects;
+        console.log("orderItems", orderItems);
+        var orderObject = {
+          orderItems: orderItems,
+          totalPrice: order.totalPrice, 
+          orderDate: order.dateTime.substring(0, 10)
+        }
+        return orderObject;
       }
       //Iterate through each order and append to allOrderObjects to create the array of all objects
       var allOrderObjects = [];
       orders.forEach(function(myOrder){
         console.log("myOrder is", myOrder);
-        let oneOrderObjectsArray = createOrderObjectsFromOrder(myOrder);
-        console.log("one order", oneOrderObjectsArray);
-        allOrderObjects = allOrderObjects.concat(oneOrderObjectsArray);
+        let oneOrderObject = createOrderObjectFromOrder(myOrder);
+        console.log("one order", oneOrderObject);
+        allOrderObjects.push(oneOrderObject);
       });
       this.setData({allOrderObjects});
       console.log("allOrderObjects", allOrderObjects);

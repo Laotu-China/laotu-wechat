@@ -1,21 +1,27 @@
 <!--miniprogram/pages/addUserInfo.wxml-->
-<CustomNav isBoth="{{true}}" title="My Orders"></CustomNav>
+<CustomNav isBoth="{{true}}" title="我的订单"></CustomNav>
 <view wx:if="{{allOrderObjects == undefined || allOrderObjects.length > 0}}" id="bodyContainer" class="viewPadding">
-  <itemCard wx:for="{{allOrderObjects}}" imageSrc="{{item.thumbUrl}}" style="width: 100%;">
-    <view slot="topRow">
-      <view style="height: 100%; width: 100%;">{{item.title}}</view>
-    </view>
-    <view slot="bodyRow">
-      <view id="bodyRow" style="height: 100%; width: 100%;">
-        <view>{{item.descSummary}}</view>
+  <view wx:for="{{allOrderObjects}}" wx:for-item="order" class="orderContainer">
+    <itemCard wx:for="{{order.orderItems}}" imageSrc="{{item.thumbUrl}}" style="width: 100%;">
+      <view slot="topRow">
+        <view style="height: 100%; width: 100%;">{{item.title}}</view>
       </view>
-    </view>
-    <view slot="bottomRow">
-      <view style="display:flex; align-items: center;">
-        <view>¥{{item.price}}</view>
-        <view style="margin-left:auto">x{{item.quantity}}</view>
+      <view slot="bodyRow" >
+        <view id="bodyRow" style="height: 100%; width: 100%;">
+          <view>{{item.descSummary}}</view>
+        </view>
       </view>
+      <view slot="bottomRow">
+        <view style="display:flex; align-items: center;">
+          <view>¥{{item.price}}</view>
+          <view style="margin-left:auto">x{{item.quantity}}</view>
+        </view>
+      </view>
+    </itemCard>
+    <view class="orderDetails">
+      <view>订单日期：{{order.orderDate}}</view>
+      <view>总价：￥{{order.totalPrice}}</view>
     </view>
-  </itemCard>
+  </view>
 </view>
 <view wx:else style="text-align: center;">暂无订单哦~</view>

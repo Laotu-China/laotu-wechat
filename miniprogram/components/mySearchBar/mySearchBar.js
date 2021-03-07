@@ -17,7 +17,7 @@ Component({
     },
     placeholder: {
       type: String,
-      value: 'Search'
+      value: '搜索'
     },
     value: {
       type: String,

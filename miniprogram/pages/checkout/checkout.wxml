@@ -1,7 +1,7 @@
 <CustomNav isBack="{{true}}"></CustomNav>
 <!-- Display a loading document until both cartDetailObjects and cartQuantityObjects are uploaded-->
 <view wx:if="{{pageReady}}" id="bodyContainer" class="spacedVerticalContainer sidePadding">
-  <view id="titleContainer" class="spacedVerticalElement">Checkout</view>
+  <view id="titleContainer" class="spacedVerticalElement">确认订单</view>
   <!--Container contains all of the product cards-->
   <view id="productCardsContainer" class="spacedVerticalContainer spacedVerticalElement">
     <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
@@ -31,12 +31,12 @@
     </block>
   </view>
   <view id="orderDetailsContainer" class="spacedVerticalElement spacedVerticalContainer sidePadding">
-    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Order Details</view>
+    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">订单详情</view>
     <!--If the user already has the shipping address/details set up, display details-->
     <view wx:if="{{shippingInfoComplete}}">
       <vant-cell-group>
         <!--If user clicks, will jump to editShippingInfo to change shipping info, but not user default info-->
-        <vant-cell center value="edit" is-link link-type="navigateTo" url="../editShippingInfo/editShippingInfo?setUserInfo=false">
+        <vant-cell center value="编辑" is-link link-type="navigateTo" url="../editShippingInfo/editShippingInfo?setUserInfo=false">
           <view slot="title" style="display: flex; flex-direction: column;">
             <text>{{name}}</text>
             <text>{{streetName}}</text>
@@ -60,12 +60,12 @@
     </view>
   </view>
   <view id="orderPriceContainer" class="spacedVerticalElement spacedVerticalContainer sidePadding">
-    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Summary</view>
+    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">价格详情</view>
     <vant-cell-group>
-      <vant-cell title="Subtotal" value="¥{{subTotal}}"></vant-cell>
-      <vant-cell title="Shipping" value="¥{{shippingCost}}"></vant-cell>
+      <vant-cell title="商品总价" value="¥{{subTotal}}"></vant-cell>
+      <vant-cell title="邮费" value="¥{{shippingCost}}"></vant-cell>
       <vant-cell>
-        <view slot="title" id="titleCell">Total</view>
+        <view slot="title" id="titleCell">总价</view>
         <view slot="value" id="valueCell">¥{{totalFee}}</view>
       </vant-cell>
     </vant-cell-group>

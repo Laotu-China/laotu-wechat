@@ -11,3 +11,13 @@ page{
   display: flex;
   flex-direction: column;
 }
+itemCard{
+  margin: 1rem;
+}
+.orderDetails{
+  padding: 0 1rem 1rem 1rem;
+}
+.orderContainer{
+  background-color:white; 
+  margin: 0.5rem 1rem;
+}

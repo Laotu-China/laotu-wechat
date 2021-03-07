@@ -8,7 +8,6 @@ page{
 #bodyContainer{
   /* Body will take up the rest of the space apart from the navbar and tabbar */
   flex: 1 0 10px;
-  background-color: white;
   display: flex;
   flex-direction: column;
   width: 750rpx;
@@ -18,6 +17,7 @@ page{
   height: auto;
   width: 100%;
   border-radius: 10px;
+  background-color: white;
 }
 
 #bodyRow{
