@@ -7,7 +7,7 @@
     <vant-goods-action-icon icon="cart-o" text="购物车" icon-class="iconCustom" bindtap="clickCartIcon" dot="{{_dotActive}}"></vant-goods-action-icon>
   </view>
   <view class="buttonsContainer">
-    <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="添加到购物车" bindtap="addItem"></vant-goods-action-button>
+    <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#bb3033" text="添加到购物车" bindtap="addItem"></vant-goods-action-button>
   </view>
 </view>
 <!--Add this because the tabbar is fixed and so its height isn't recognized

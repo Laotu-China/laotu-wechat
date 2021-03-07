@@ -42,7 +42,7 @@
     </view>
     <view id="buttonsContainer" class="spacedVerticalContainer">
       <!--Only render checkout button if there are items in the cart-->
-      <vant-button wx:if="{{numCartItems > 0}}" type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">结算</vant-button>
+      <vant-button wx:if="{{numCartItems > 0}}" type="primary" class="spacedVerticalElement" color="#bb3033" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">结算</vant-button>
       <view class="spacedVerticalElement" bindtap="clickContinueShopping" style="text-align: center;">继续购物</view>
     </view>
   </view>
