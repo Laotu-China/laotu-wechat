@@ -9,7 +9,7 @@
         <view id="eventBody" class="spacedVerticalContainer sidePadding">
           <block wx:for="{{item.events}}" wx:for-item="eventObject">
             <view class="eventCard spacedVerticalElement">
-              <eventCard data-itemid="{{eventObject._id}}" bindtap="eventCardClick" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+              <eventCard data-itemid="{{eventObject._id}}" bindtap="eventCardClick" style="width: 100%; border-radius: inherit;" imageSrc="{{eventObject.thumbUrl}}">
                 <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
                 <view slot="topRow" style="width: 100%;">
                   <view style="color:#202020">{{eventObject.title}}</view>

@@ -25,7 +25,7 @@
         <!--Contains the favorite and forward icon. Hidden until isFavorited is set-->
       <view id="iconsContainer" style="display:flex; visibility : {{isFavorited == null ? 'hidden' : 'visible'}}">
           <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
-            <mp-icon icon="like" size="{{30}}" color="red" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
+            <mp-icon icon="like" size="{{30}}" color="#bb3033" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
           </view>
           <view class="shareButton" hover-class="mp-icon-hover" hover-stay-time="{{200}}">
             <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>

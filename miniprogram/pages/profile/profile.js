@@ -109,7 +109,7 @@ Page({
       });
     }).exec();
     //upload the height of the circle_icon
-    wx.createSelectorQuery().select('.icon_container').boundingClientRect(function(rect){
+    wx.createSelectorQuery().select('.iconContainer').boundingClientRect(function(rect){
       var circle_icon_width = String(rect.height);
       //upload the width data
       that.setData({
@@ -196,7 +196,7 @@ Page({
   },
   clickUserIcon: function(){
     wx.navigateTo({
-      url: "../editShippingInfo/editShippingInfo?setUserInfo=true"
+      url: "../myorders/myorders"
     })
   }    
 

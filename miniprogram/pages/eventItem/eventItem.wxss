@@ -39,7 +39,6 @@ page{
   height: auto;
   width: 100%;
   display: flex;
-  /*background-color: crimson;*/
 }
 .textContainer{
   /* Should take up the rest of the width beyond the icons */
