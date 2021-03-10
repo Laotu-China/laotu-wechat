@@ -23,7 +23,6 @@ page{
   background-color: white;
   padding: 1rem;
   display: flex;
-  display: none; /* hidden for now since it's dup fucntionality */
   justify-content: space-between;
 }
 
@@ -72,3 +71,8 @@ page{
 #tableContainer{
   width: 100%;
 }
+button{
+  background-color: #bb3033!important;
+  margin-top: 1rem;
+}
+
