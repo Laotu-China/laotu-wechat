@@ -7,7 +7,7 @@
   <!-- NOTE: type parameter should be either 'product' or 'event'-->
   <MySearchBar type="product" isNavigator="{{true}}" searchObjectsArray="{{productArray}}"></MySearchBar>
   <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
-    <block wx:for="{{categoryProductsArray}}" wx:key="unique1">
+    <block wx:if="{{categoryProductsArray == undefined || categoryProductsArray.length > 0}}" wx:for="{{categoryProductsArray}}" wx:key="unique1">
       <vant-tab title="{{item.categoryName}}">
         <!--Contains the productCards-->
         <view id="productBody" class="spacedVerticalContainer sidePadding">
@@ -26,7 +26,10 @@
         </view>
       </vant-tab>
     </block>
-  </vant-tabs>  
+    <block wx:if="{{categoryProductsArray.length == 0}}">
+      <view style="text-align: center;">暂无商品哦~</view>
+    </block>
+    </vant-tabs>  
 </view>
 
 

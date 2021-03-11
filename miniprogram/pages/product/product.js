@@ -43,7 +43,7 @@ var app = getApp();
 
     //Pass in the array of all productObjects to the searchbar 
     let _productArray = categoryProductsArray.filter(obj => obj.categoryName === 'All');
-    let productArray = _productArray[0].products;
+    let productArray = _productArray[0]?.products;
     console.log("productArray", productArray);
     this.setData({productArray : productArray});
   },
